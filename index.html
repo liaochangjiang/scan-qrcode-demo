@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>扫码登录 Demo</title>
+</head>
+
+<body>
+
+</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="./sdk/index.js"></script>
+<script>
+  startAppAuthScanning({
+    onPollingStart: function (intervalNum) {
+      console.log("Start polling for qrcode status: ", intervalNum)
+      // clearInterval(intervalNum)
+    },
+    onResult: function (res) {
+      console.log("Got qrcode latest result: ", res)
+    },
+    onScanned: function (userInfo) {
+      console.log("User scanned qrcode: ", userInfo)
+    },
+    onSuccess: function (userInfo) {
+      console.log(userInfo)
+    },
+    onCancel: function () {
+      console.log("User canceled authorization")
+    },
+    onExpired: function () {
+      console.log("QRCode has expired.")
+    },
+    onError: function (data) {
+      console.log("Chcek qrcode status failed: ", data)
+    }
+  })
+</script>
+
+</html>
